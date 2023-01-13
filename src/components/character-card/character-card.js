@@ -6,8 +6,6 @@ import '../styles/character-card.scss';
 export const CharacterCards = ({ searchTerm, sort, pageNumber }) => {
   const [disneyCharacters, setDisneyCharacters] = useState([]);
 
-  console.log(pageNumber);
-
   useEffect(() => {
     const getCharacters = async () => {
       console.log(pageNumber);
