@@ -1,43 +1,43 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
-import "../styles/character-card.scss"
+import '../styles/character-card.scss';
 
-export const CharacterCards = ({ searchTerm, sort }) => {
+export const CharacterCards = ({ searchTerm, sort, pageNumber }) => {
   const [disneyCharacters, setDisneyCharacters] = useState([]);
+
+  console.log(pageNumber);
 
   useEffect(() => {
     const getCharacters = async () => {
-      const charactersRes = axios.get("https://api.disneyapi.dev/characters");
+      console.log(pageNumber);
+      const charactersRes = axios.get('https://api.disneyapi.dev/characters', { params: { page: pageNumber } });
       if (!searchTerm.length) {
         try {
           let response = await charactersRes;
           setDisneyCharacters(response.data.data);
-        }
-        catch (e) {
+        } catch (e) {
           console.log('Request Failed:', e);
         }
       }
-    }
+    };
     getCharacters();
-  }, [searchTerm])
+  }, [pageNumber, searchTerm]);
 
   useEffect(() => {
     const getSearchedCharacter = async () => {
-      const searchCharactersRes = axios.get("https://api.disneyapi.dev/character", { params: { name: searchTerm } });
+      const searchCharactersRes = axios.get('https://api.disneyapi.dev/character', { params: { name: searchTerm } });
       if (searchTerm.length) {
         try {
           let response = await searchCharactersRes;
           setDisneyCharacters(response.data.data);
-        }
-        catch (e) {
+        } catch (e) {
           console.log('Request Failed:', e);
         }
       }
-    }
+    };
     getSearchedCharacter();
   }, [searchTerm]);
-
 
   const sortAlpha = (arr) => {
     arr.sort((a, b) => {
@@ -65,8 +65,7 @@ export const CharacterCards = ({ searchTerm, sort }) => {
 
   sort ? sortAlpha(disneyCharacters) : sortReverse(disneyCharacters);
 
-  return (
-    disneyCharacters.length ?
+  return disneyCharacters.length ? (
     disneyCharacters.map((character, i) => {
       return (
         <div className="col-sm-6 col-lg-4 mb-4" key={i}>
@@ -76,34 +75,32 @@ export const CharacterCards = ({ searchTerm, sort }) => {
               <h2 className="card-title">{character.name}</h2>
               <ul className="list-group">
                 <li className="list-group-item">
-                  <div><strong>Featured Films:</strong></div>
-                  {
-                    character.films.length ? character.films.map((film, i) => {
-                      return (
-                        <div key={i}>{film}</div>
-                      )
-                    })
-                    : "Not featured in any Disney movies"
-                  } 
+                  <div>
+                    <strong>Featured Films:</strong>
+                  </div>
+                  {character.films.length
+                    ? character.films.map((film, i) => {
+                        return <div key={i}>{film}</div>;
+                      })
+                    : 'Not featured in any Disney movies'}
                 </li>
                 <li className="list-group-item">
-                  <div><strong>Featured TV Shows:</strong></div>
-                  {
-                    character.tvShows.length ? character.tvShows.map((shows, i) => {
-                      return (
-                        <div key={i}>{shows}</div>
-                      )
-                    })
-                    : "Not featured in any Disney TV shows"
-                  } 
+                  <div>
+                    <strong>Featured TV Shows:</strong>
+                  </div>
+                  {character.tvShows.length
+                    ? character.tvShows.map((shows, i) => {
+                        return <div key={i}>{shows}</div>;
+                      })
+                    : 'Not featured in any Disney TV shows'}
                 </li>
               </ul>
             </div>
           </div>
         </div>
-      )
+      );
     })
-    : 
+  ) : (
     <div className="col-xs-12">
       <div className="d-flex justify-content-center">
         <div className="spinner-border text-secondary" role="status">
@@ -111,5 +108,5 @@ export const CharacterCards = ({ searchTerm, sort }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
