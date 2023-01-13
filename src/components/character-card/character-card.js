@@ -8,12 +8,12 @@ export const CharacterCards = ({ searchTerm, sort }) => {
 
   useEffect(() => {
     const getCharacters = async () => {
-      const charactersRes = axios.get("https://api.disneyapi.dev/characters")
+      const charactersRes = axios.get("https://api.disneyapi.dev/characters");
       if (!searchTerm.length) {
         try {
           let response = await charactersRes;
           setDisneyCharacters(response.data.data);
-              }
+        }
         catch (e) {
           console.log('Request Failed:', e);
         }
@@ -70,7 +70,7 @@ export const CharacterCards = ({ searchTerm, sort }) => {
     disneyCharacters.map((character, i) => {
       return (
         <div className="col-sm-6 col-lg-4 mb-4" key={i}>
-          <div className="card h-100  border-secondary">
+          <div className="card h-100 border-secondary">
             <img src={character.imageUrl} className="card-img-top card-img" alt="disney character" />
             <div className="card-body">
               <h2 className="card-title">{character.name}</h2>

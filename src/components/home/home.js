@@ -3,8 +3,8 @@ import { Header } from "../header/header"
 import { CharacterCards } from "../character-card/character-card"
 
 export const Home = () => {
-  const [searchTerm, setSearchTerm] = useState("")
-  const [sort, setSort] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sort, setSort] = useState(false);
 
   return ( 
     <>
