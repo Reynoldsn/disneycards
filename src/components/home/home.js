@@ -10,7 +10,9 @@ export const Home = () => {
     <>
       <Header setSearchTerm={setSearchTerm} />
       <div className="container">
-        <button type="button" className="btn btn-outline-secondary mb-3" onClick={() => setSort(!sort)}>{sort ? "Sort Alphabetically" : "Sort Reverse"}</button>
+        <button type="button" className="btn btn-outline-secondary mb-3" onClick={() => setSort(!sort)}>
+          {sort ? "Sort Alphabetically" : "Sort Reverse"}
+        </button>
         <div className="row">
           <CharacterCards searchTerm={searchTerm} sort={sort} />
         </div>
