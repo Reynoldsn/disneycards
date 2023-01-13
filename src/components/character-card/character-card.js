@@ -6,7 +6,7 @@ import "../styles/character-card.scss"
 export const CharacterCards = ({ searchTerm, sort }) => {
   const [disneyCharacters, setDisneyCharacters] = useState([]);
 
-    useEffect(() => {
+  useEffect(() => {
     const getCharacters = async () => {
       const charactersRes = axios.get("https://api.disneyapi.dev/characters")
       if (!searchTerm.length) {
