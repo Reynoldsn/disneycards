@@ -8,7 +8,6 @@ export const CharacterCards = ({ searchTerm, sort, pageNumber }) => {
 
   useEffect(() => {
     const getCharacters = async () => {
-      console.log(pageNumber);
       const charactersRes = axios.get('https://api.disneyapi.dev/characters', { params: { page: pageNumber } });
       if (!searchTerm.length) {
         try {

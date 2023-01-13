@@ -8,7 +8,7 @@ export const Paginator = ({ setPageNumber, pageNumber }) => {
           {pageNumber > 1 && (
             <a href="#" className="page-link" aria-label="Previous" onClick={() => setPageNumber(pageNumber--)}>
               <span aria-hidden="true">
-                <i class="bi bi-chevron-compact-left"></i>
+                <i className="bi bi-chevron-compact-left"></i>
               </span>
             </a>
           )}
@@ -16,7 +16,7 @@ export const Paginator = ({ setPageNumber, pageNumber }) => {
         <li className="page-item">
           <a href="#" className="page-link" aria-label="Next" onClick={() => setPageNumber(pageNumber++)}>
             <span aria-hidden="true">
-              <i class="bi bi-chevron-compact-right"></i>
+              <i className="bi bi-chevron-compact-right"></i>
             </span>
           </a>
         </li>
