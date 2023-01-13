@@ -4,68 +4,68 @@ import { useEffect, useState } from "react"
 import "../styles/character-card.scss"
 
 export const CharacterCards = ({ searchTerm, sort }) => {
-	const [disneyCharacters, setDisneyCharacters] = useState([]);
+  const [disneyCharacters, setDisneyCharacters] = useState([]);
 
     useEffect(() => {
-		const getCharacters = async () => {
-			const charactersRes = axios.get("https://api.disneyapi.dev/characters")
-			if (!searchTerm.length) {
-				try {
-					let response = await charactersRes;
-					setDisneyCharacters(response.data.data);
-            	}
-				catch (e) {
-					console.log('Request Failed:', e);
-				}
-			}
-		}
-		getCharacters();
-	}, [searchTerm])
+    const getCharacters = async () => {
+      const charactersRes = axios.get("https://api.disneyapi.dev/characters")
+      if (!searchTerm.length) {
+        try {
+          let response = await charactersRes;
+          setDisneyCharacters(response.data.data);
+              }
+        catch (e) {
+          console.log('Request Failed:', e);
+        }
+      }
+    }
+    getCharacters();
+  }, [searchTerm])
 
-	useEffect(() => {
-		const getSearchedCharacter = async () => {
-			const searchCharactersRes = axios.get("https://api.disneyapi.dev/character", { params: { name: searchTerm } });
-			if (searchTerm.length) {
-				try {
-					let response = await searchCharactersRes;
-					setDisneyCharacters(response.data.data);
-				}
-				catch (e) {
-					console.log('Request Failed:', e);
-				}
-			}
-		}
+  useEffect(() => {
+    const getSearchedCharacter = async () => {
+      const searchCharactersRes = axios.get("https://api.disneyapi.dev/character", { params: { name: searchTerm } });
+      if (searchTerm.length) {
+        try {
+          let response = await searchCharactersRes;
+          setDisneyCharacters(response.data.data);
+        }
+        catch (e) {
+          console.log('Request Failed:', e);
+        }
+      }
+    }
     getSearchedCharacter();
-	}, [searchTerm]);
+  }, [searchTerm]);
 
 
-	const sortAlpha = (arr) => {
-		arr.sort((a, b) => {
+  const sortAlpha = (arr) => {
+    arr.sort((a, b) => {
       const nameA = a.name.toUpperCase();
-			const nameB = b.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
 
-			if (nameA > nameB) return -1;
-			if (nameA < nameB) return 1;
+      if (nameA > nameB) return -1;
+      if (nameA < nameB) return 1;
 
-			return 0;
-		});
-	};
+      return 0;
+    });
+  };
 
-	const sortReverse = (arr) => {
-		arr.sort((a, b) => {
+  const sortReverse = (arr) => {
+    arr.sort((a, b) => {
       const nameA = a.name.toUpperCase();
-			const nameB = b.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
 
-			if (nameA < nameB) return -1;
-			if (nameA > nameB) return 1;
+      if (nameA < nameB) return -1;
+      if (nameA > nameB) return 1;
 
-			return 0;
-		});
-	};
+      return 0;
+    });
+  };
 
-	sort ? sortAlpha(disneyCharacters) : sortReverse(disneyCharacters);
+  sort ? sortAlpha(disneyCharacters) : sortReverse(disneyCharacters);
 
-	return (
+  return (
     disneyCharacters.length ?
     disneyCharacters.map((character, i) => {
       return (
